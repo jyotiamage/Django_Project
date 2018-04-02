@@ -1,0 +1,30 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'poll/style.css' %}" />
+
+<div align="center" style="margin-top: 10px">
+<h1 style="font-style: initial;">Welcome to Monthly Feedback system</h1>
+</div>
+<div class='bar'>
+<ul class="myul">
+  <li><a class="active" href="#home">Home</a></li>
+  <li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li>
+</ul>
+</div>
+<div style="margin-top:200px; margin-left: 200px">
+	<p>
+		Hello parents,<br>
+			We welcome you to monthly Feedback system. This system </br>monitors your attentions toward your child.For measuring this you need to login into the system. </br> If you are not already a member of this system you need to sign-up.
+			</br>
+			</br>
+			Lets proceed.
+	</p>
+</div>
+<div style="margin-top:200px; margin-left: 400px">
+<a href="{% url 'poll:login'%}" style="margin-left: 20px">Login</a>
+<a href="{% url 'poll:signup'%}" style="margin-left: 20px">Signup</a>
+
+	
+</div>

@@ -1,0 +1,23 @@
+li a {
+    color: green;
+    font-size: 20px;
+}
+
+body {
+    background: white url("images/background.jpg") no-repeat right bottom ;
+    
+    height: 50%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container {
+
+    margin-top: 350px;
+    margin-left: 250px;
+}
+
+
