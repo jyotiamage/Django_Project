@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'poll/style.css' %}" />
+    <title>{% block title %}My Polling site{% endblock %}</title>
+</head>
+
+<body>
+<div>
+    <div align="center" >
+		<h1 style="font-style: initial;">Welcome to Monthly Feedback system</h1>
+	</div>
+
+	<div class='bar'>
+		<ul class="myul">
+  			<li><a  href="{% url 'poll:home' %}">Home</a></li>
+  			<li><a  href="{% url 'poll:index' %}">Poll</a></li>
+  			<li><a  href="#contact">Contact</a></li>
+  			<li><a  href="#about">About</a></li>
+		</ul>
+	</div>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+</body>
+</html>
