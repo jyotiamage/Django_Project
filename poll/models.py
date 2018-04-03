@@ -3,6 +3,29 @@ from django.db import models
 import datetime
 from django.utils import timezone
 
+relation_ship=(
+	("father", "Father"),
+	("mother", "Mother"),
+	("care_taker","Care Taker"),
+	("guardian","Guardina"),	)
+)
+
+gender=(
+	("M","Male")
+	("F","Female")
+)
+
+class Parent(models.Model):
+	first_name = models.CharField(max_length=200)
+	last_name = models.CharField(max_length=200)
+	relation = models.CharField(max_length=20, choices=relation_ship)
+	gender = models.CharField(max_length=20, choices=gender)
+
+class Child(models.Model):
+	parent = models.ForeignKey(Parent, related_name='children')
+	child_name = models.CharField(max_length=200)
+	gender = models.CharField(max_length=20, choices=gender)
+
 
 class Question(models.Model):
 	question_text= models.CharField(max_length=200)

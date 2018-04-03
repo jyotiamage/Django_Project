@@ -6,7 +6,8 @@ from django.views import generic
 from django.contrib.auth import authenticate, get_user_model,logout
 from django.contrib.auth import login as dj_login
 from .models import Question, Choice
-from .form import UserLoginForm
+from .form import UserLoginForm, SignUpForm
+from django.contrib.auth.models import User
 '''def index(request):
 	latest_question_list = Question.objects.order_by('-pub_date')[:5]
 	context = {'latest_question_list': latest_question_list}
@@ -39,21 +40,15 @@ def login_view(request):
 
 
 def signup_view(request):
-    print(request.user.is_authenticated)
-    next=request.GET.get('next')
-    title ="Login"
-    form = UserLoginForm(request.POST or None)
-    if form.is_valid():
-        user = form.save(commit=False)
-        password = form.cleaned_data.get("password")
-        user.set_password(password)
-        user.save()
-        new_user= authenticate(username=username, password=password)
-        dj_login(request, new_user)
-        if next:
-            return redirect(next)
-        return redirect("poll/index.html")
-    return render(request,"poll/singup.html",{"form":form,"title":title})
+    title="Signup"
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(username = form.cleaned_data.get('username'),
+            password = form.cleaned_data.get('password1'), email=form.cleaned_data.get('email'))
+            return HttpResponseRedirect("/home_polls/")
+    form = SignUpForm()
+    return render(request, 'poll/signup.html',{'form':form,"title":title})
 
 def logout_view(request):
     logout(request)
@@ -77,8 +72,10 @@ def signupView(request):
     return HttpResponse("Hello signup page")
     #return render(request, "Hello signup page")
 
+
 def index(request):
     latest_question_list = Question.objects.all()
+
     context = {'latest_question_list': latest_question_list}
     return render(request, 'poll/index.html', context)
 
